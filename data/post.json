@@ -101,5 +101,17 @@
     "profile_image": "/images/free-icon-whale-1045140.png",
     "likes": 0,
     "comments": 0
+  },
+  {
+    "id": 10,
+    "title": "test",
+    "content": "teset",
+    "image": "/uploads/post-1718820338360.png",
+    "createtime": "2024-06-20 03:05:38",
+    "views": 0,
+    "nickname": "익명",
+    "profile_image": "/images/free-icon-whale-1045140.png",
+    "likes": 0,
+    "comments": 0
   }
 ]

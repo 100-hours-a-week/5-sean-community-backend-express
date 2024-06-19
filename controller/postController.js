@@ -28,42 +28,42 @@ module.exports.getPost = async (req, res, next) => {
 };
 
 module.exports.postPost = async (req, res, next) => {
-    const { title, content, image } = req.body;
+    const { title, content, image, userId, nickname, profileImage } = req.body;
 
     try {
-
         const data = await fs.readFile(filePath, 'utf8');
         const posts = JSON.parse(data);
-        const imageData = image.split(';base64,').pop();  // Base64 데이터 추출
-
+        const imageData = image.split(';base64,').pop();
         const uploadsDir = '/Users/junho/Desktop/startupcode/git/grulla79/5-sean-kim-kks-community/back/uploads';
         
         if (!fs2.existsSync(uploadsDir)) {
             fs2.mkdirSync(uploadsDir);
         }
 
-        const newImageName = `post-${Date.now()}.png`;  // 새 이미지 파일 이름
-        const imagePath = path.join(uploadsDir, newImageName); // 상대 경로로 저장 경로 변경
+        const newImageName = `post-${Date.now()}.png`;
+        const imagePath = path.join(uploadsDir, newImageName);
 
         await fs.writeFile(imagePath, imageData, {encoding: 'base64'}).catch(err => {
-            console.error('Error writing the image file:', err);  // 에러 로깅 추가
+            console.error('Error writing the image file:', err);
         });
+
         const newPost = {
             id: posts.length > 0 ? posts[posts.length - 1].id + 1 : 1,
             title: title,
             content: content,
-            image: `/uploads/${newImageName}`, // 웹 접근 가능 경로
+            image: `/uploads/${newImageName}`,
             createtime: formatDate(),
             views: 0,
-            nickname: "익명",
-            profile_image: "/images/free-icon-whale-1045140.png",
+            nickname: nickname,
+            profile_image: profileImage,
             likes: 0,
             comments: 0,
+            userId: userId
         };
-        
+
         posts.push(newPost);
         await fs.writeFile(filePath, JSON.stringify(posts, null, 2), 'utf8');
-        
+
         res.status(201).send({ message: 'Post created successfully', post: newPost });
     } catch (error) {
         console.error(error);
