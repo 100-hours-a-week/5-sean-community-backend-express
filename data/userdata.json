@@ -1,0 +1,44 @@
+[
+  {
+    "userid": 1,
+    "email": "jh9826@naver.com",
+    "password": "qwerQ123!",
+    "nickname": "김민수",
+    "profile_image": "/images/free-icon-animal-13586859.png"
+  },
+  {
+    "userid": 2,
+    "email": "lh7255@naver.com",
+    "password": "asdfA123!",
+    "nickname": "정재형",
+    "profile_image": "/images/free-icon-animals-1717994.png"
+  },
+  {
+    "userid": 3,
+    "email": "qw234@naver.com",
+    "password": "asdfA123!",
+    "nickname": "이용주",
+    "profile_image": "/images/free-icon-penguin-1864572.png"
+  },
+  {
+    "userid": 4,
+    "email": "qr123@naver.com",
+    "password": "asdfA123!",
+    "nickname": "이영애",
+    "profile_image": "/images/free-icon-whale-1045140.png"
+  },
+  {
+    "userid": 5,
+    "email": "wnsgh9826@naver.com",
+    "password": "Dyrajrdj135!",
+    "nickname": "grulla79",
+    "image": "/Users/junho/Desktop/startupcode/git/grulla79/5-sean-kim-kks-community/back/uploads/user/grulla79-1718038623131.png"
+  },
+  {
+    "userid": 6,
+    "email": "jh9826@naver.com",
+    "password": "Dyrajrdj135!",
+    "nickname": "aogihqreo",
+    "image": "/Users/junho/Desktop/startupcode/git/grulla79/5-sean-kim-kks-community/back/uploads/user/aogihqreo-1718124042458.png"
+  }
+]

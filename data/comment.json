@@ -1,0 +1,82 @@
+[
+  {
+    "postId": 1,
+    "commentId": 1,
+    "nickname": "배수민",
+    "createtime": "2024:04:12 09:00:00",
+    "content": "맛있어 보여요"
+  },
+  {
+    "postId": 2,
+    "commentId": 2,
+    "nickname": "김나연",
+    "createtime": "2024:04:15 09:24:00",
+    "content": "점메추용!~~~~~~~~~~~~"
+  },
+  {
+    "postId": 2,
+    "commentId": 3,
+    "nickname": "이시온",
+    "createtime": "2024:04:16 17:25:01",
+    "content": "배고프네"
+  },
+  {
+    "postId": 3,
+    "commentId": 4,
+    "nickname": "이혜나",
+    "createtime": "2024:04:14 18:23:01",
+    "content": "오늘 점심은 이거다"
+  },
+  {
+    "postId": 3,
+    "commentId": 5,
+    "nickname": "레이즈",
+    "createtime": "2024:04:13 13:26:20",
+    "content": "여기 어디임?"
+  },
+  {
+    "postId": 3,
+    "commentId": 6,
+    "nickname": "바이퍼",
+    "createtime": "2024:04:12 14:37:00",
+    "content": "진짜 맛있어 보이네"
+  },
+  {
+    "postId": 4,
+    "commentId": 7,
+    "nickname": "브리치",
+    "createtime": "2024:04:11 11:42:00",
+    "content": "10만원 예상합니다"
+  },
+  {
+    "postId": 4,
+    "commentId": 8,
+    "nickname": "레이나",
+    "createtime": "2024:04:18 12:16:00",
+    "content": "난 별로네"
+  },
+  {
+    "postId": "1",
+    "commentId": 9,
+    "userId": 5,
+    "nickname": "grulla79",
+    "createtime": "2024-06-18 14:22:05",
+    "content": "수정해야징"
+  },
+  {
+    "postId": "1",
+    "commentId": 12,
+    "userId": 6,
+    "nickname": "aogihqreo",
+    "createtime": "2024-06-18 17:03:31",
+    "content": "피자 맛있겠다 ㅎㅎ"
+  },
+  {
+    "postId": "2",
+    "commentId": 13,
+    "userId": 6,
+    "nickname": "aogihqreo",
+    "createtime": "2024-06-18 17:03:52",
+    "content": "짜장면 맛있어보인다"
+  }
+]
