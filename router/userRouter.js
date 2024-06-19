@@ -13,10 +13,11 @@ router.get('/session', (req, res) => {
 });
 
 router.get('/', userPath.getAllUserdata);  // 모든 사용자 데이터를 가져오는 라우트 추가
-router.get('/:userId', userPath.getUserdataById);  // 새로운 라우트 추가
+router.get('/:userId', userPath.getUserdataById);
 router.post('/signin', userPath.loginUser);
 router.post('/signup', userPath.createUserdata);
 router.patch('/:userId', userPath.updateUserdata);
+router.patch('/:userId/password', userPath.updateUserPassword);
 router.delete('/:userId', userPath.deleteUserdata);
 
 module.exports = router;

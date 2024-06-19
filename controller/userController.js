@@ -24,6 +24,7 @@ module.exports.createUserdata = async (req, res) => {
     const uploadsDir = path.join(__dirname, '../uploads/user');
     const imageName = `${nickname}-${Date.now()}.png`;
     const imagePath = path.join(uploadsDir, imageName);
+    const imageUrl = `/uploads/user/${imageName}`;
 
     try {
         await fs.mkdir(uploadsDir, { recursive: true });
@@ -36,7 +37,7 @@ module.exports.createUserdata = async (req, res) => {
             email: email,
             password: password,
             nickname: nickname,
-            image: imagePath
+            image: imageUrl // 이미지 URL을 저장
         };
         userData.push(newUser);
         await fs.writeFile(filePath, JSON.stringify(userData, null, 2), 'utf8');
@@ -86,9 +87,10 @@ module.exports.updateUserdata = async (req, res) => {
         if (userIndex !== -1) {
             userData[userIndex].nickname = nickname;
             if (image) {
-                const imagePath = path.join(__dirname, `../uploads/user/${nickname}-${Date.now()}.png`);
+                const imageName = `${nickname || userData[userIndex].nickname}-${Date.now()}.png`;
+                const imagePath = path.join(__dirname, `../uploads/user/${imageName}`);
                 await fs.writeFile(imagePath, image, { encoding: 'base64' });
-                userData[userIndex].image = imagePath;
+                userData[userIndex].image = `/uploads/user/${imageName}`; // 이미지 URL 설정
             }
             await fs.writeFile(filePath, JSON.stringify(userData, null, 2), 'utf8');
             res.status(200).json({ message: "User data updated successfully" });
@@ -97,6 +99,26 @@ module.exports.updateUserdata = async (req, res) => {
         }
     } catch (error) {
         console.error('Error in updateUserdata:', error);
+        res.status(500).send("Server Error");
+    }
+};
+
+module.exports.updateUserPassword = async (req, res) => {
+    const { password } = req.body;
+    const userId = parseInt(req.params.userId);
+
+    try {
+        let userData = JSON.parse(await fs.readFile(filePath, 'utf8'));
+        const userIndex = userData.findIndex(u => u.userid === userId);
+        if (userIndex !== -1) {
+            userData[userIndex].password = password;
+            await fs.writeFile(filePath, JSON.stringify(userData, null, 2), 'utf8');
+            res.status(200).json({ message: "User password updated successfully" });
+        } else {
+            res.status(404).json({ message: "User not found" });
+        }
+    } catch (error) {
+        console.error('Error in updateUserPassword:', error);
         res.status(500).send("Server Error");
     }
 };
