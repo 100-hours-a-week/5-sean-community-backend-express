@@ -17,6 +17,23 @@ function formatDate() {
     return year + "-" + month + "-" + day +" "+hours+":"+minutes+":"+seconds
 }
 
+module.exports.getPostById = async (req, res, next) => {
+    const postId = parseInt(req.params.id);
+    try {
+        const data = await fs.readFile(filePath, 'utf8');
+        const posts = JSON.parse(data);
+        const post = posts.find(p => p.id === postId);
+        if (post) {
+            res.status(200).json(post);
+        } else {
+            res.status(404).json({ message: "Post not found" });
+        }
+    } catch (error) {
+        console.error('Error reading the file:', error);
+        res.status(500).json({ message: "서버에서 파일을 읽는 중 오류가 발생했습니다." });
+    }
+};
+
 module.exports.getPost = async (req, res, next) => {
     try {
         const data = await fs.readFile(filePath, 'utf8');
@@ -82,27 +99,44 @@ module.exports.deletePost = async (req, res, next) => {
     }
 };
 
-module.exports.updatePost = async(req, res, next) => {
+module.exports.updatePost = async (req, res) => {
+    const { title, content, image } = req.body;
     const postId = parseInt(req.params.id);
-    const { title, content } = req.body;
 
     try {
         const data = await fs.readFile(filePath, 'utf8');
         let posts = JSON.parse(data);
+        const postIndex = posts.findIndex(post => post.id === postId);
 
-        const postIndex = posts.findIndex(post => post.id == postId);
         if (postIndex !== -1) {
             posts[postIndex].title = title;
             posts[postIndex].content = content;
+            if (image) {
+                const imageData = image.split(';base64,').pop();
+                const uploadsDir = '/Users/junho/Desktop/startupcode/git/grulla79/5-sean-kim-kks-community/back/uploads';
 
-            await fs.writeFile(filePath, JSON.stringify(posts, null, 2));
-            res.status(200).send('Post updated');
+                if (!fs2.existsSync(uploadsDir)) {
+                    fs2.mkdirSync(uploadsDir);
+                }
+
+                const newImageName = `post-${Date.now()}.png`;
+                const imagePath = path.join(uploadsDir, newImageName);
+
+                await fs.writeFile(imagePath, imageData, {encoding: 'base64'}).catch(err => {
+                    console.error('Error writing the image file:', err);
+                });
+
+                posts[postIndex].image = `/uploads/${newImageName}`;
+            }
+
+            await fs.writeFile(filePath, JSON.stringify(posts, null, 2), 'utf8');
+            res.status(200).send({ message: 'Post updated successfully' });
         } else {
-            return res.status(404).send('Post not found');
+            res.status(404).send({ message: 'Post not found' });
         }
-    } catch (err) {
-        console.error("Error:", err);
-        res.status(500).send('Error processing your request');
+    } catch (error) {
+        console.error('Error updating post:', error);
+        res.status(500).send({ message: 'Error updating post' });
     }
 };
 

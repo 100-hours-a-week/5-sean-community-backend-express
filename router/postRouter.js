@@ -7,6 +7,8 @@ const postPath = require("../controller/postController");
 
 router.get("/", postPath.getPost);
 
+router.get('/:id', postPath.getPostById);  // 특정 게시글 데이터를 가져오는 라우트 추가
+
 router.post("/", postPath.postPost);
 
 router.delete("/:id", postPath.deletePost);
