@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const MySQLStore = require('express-mysql-session')(session);
+const db = require('./config/mysql');
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '5mb', extended: true }));
@@ -23,6 +24,9 @@ const dbOptions = {
 };0
 
 const sessionStore = new MySQLStore(dbOptions);
+
+const connection = db.init();
+db.connect(connection);
 
 // CORS 정책 설정: credentials 옵션과 함께 구체적인 도메인 지정
 app.use(cors({
